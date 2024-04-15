@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redaguoti darbą</title>
+    <style>
+        body {
+            background-color: Plum;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+        }
+        form {
+            text-align: left;
+            display: inline-block;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Redaguoti darbą</h1>
+            <form action="/edit_task/{{ task.id }}" method="post">
+                <label for="title">Pavadinimas:</label><br>
+                <input type="text" id="title" name="title" value="{{ task.title }}" required><br>
+                <label for="description">Aprašas:</label><br>
+                <textarea id="description" name="description" required>{{ task.description }}</textarea><br>
+                <label for="status">Statusas:</label><br>
+                <select id="status" name="status">
+                    <option value="Neatlikta" {% if task.status == 'Neatlikta' %}selected{% endif %}>Neatlikta</option>
+                    <option value="Atlikta" {% if task.status == 'Atlikta' %}selected{% endif %}>Atlikta</option>
+                    <option value="Nukelta" {% if task.status == 'Nukelta' %}selected{% endif %}>Nukelta</option>
+                </select><br>
+                <label for="user">Naudotojas:</label><br>
+                <input type="text" id="user" name="user" value="{{ task.user }}" required><br>
+                <button type="submit">Atnaujinti darbą</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
